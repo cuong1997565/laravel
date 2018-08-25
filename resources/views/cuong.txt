@@ -1,0 +1,39 @@
+sudo chmod -R 777 storage bootstrap
+
+
+////////////////////////////////
+./start_navicat
+///////////////////////////////////
+ArticlesTableSeeder
+
+///////////////////////
+php artisan make:factory ArticleFactory
+
+
+php artisan make:controller ArticleController --resource
+
+
+php artisan make:resource  Article
+
+///////////////ajax
+factori
+
+REPONSITE
+
+RESOURCES
+
+
+RESORCES CONTROLLER
+
+
+RYPONSITORY DEGINS
+
+
+//////////////////
+
+npm run watch-poll
+
+
+
+
+

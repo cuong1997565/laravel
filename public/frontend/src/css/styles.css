@@ -1,0 +1,283 @@
+*{margin:0;padding:0; }
+.padd0{
+    padding: 0px;
+
+}
+
+.nav{
+    padding: 0px;
+}
+
+.navbar-dark .navbar-toggler{
+    color: rgba(239, 0, 0, 0.5);
+    border-color: #0c5460;
+}
+
+.navbar-toggler-icon{
+    height: 1px;
+    border: 1px solid;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.navbar-collapse .fa-search{
+            margin-right: 10px;
+}
+
+.default{
+       background: #ffffff !important;
+}
+.navbar-collapse #menu1 .nav-item .nav-link {
+    color: #b1b1b1;
+}
+
+.navbar-collapse #menu2 .nav-item .nav-link {
+    color: #295fe9;
+}
+
+/* .form-group #exampleInputEmail1{
+    display: none;
+} */
+
+.logo{
+       background: blue;
+       padding-left: 150px;
+       padding-bottom: 20px;
+       padding-right: 22px;
+       padding-top: 15px;
+}
+.group{
+       margin-bottom: 0px;
+       display: none;
+}
+/* menu
+ .navbar-dark .navbar-nav .nav-link{
+        color: white ;
+} */
+    .slide{
+        position: relative;
+    }
+
+    .content{
+        position: absolute;
+        width: 1024px;
+        height: 200px;
+        top: 25%;
+        left: 11%;
+    }
+
+#anh-slide{
+        width:100px;
+        display:  block;
+        margin:  0px auto;
+        }
+
+        .noidung{
+            text-align: center;
+            color: white;
+            font-size: 29px;
+        }
+
+        .slide-info{
+              margin-top: 10%;
+        }
+
+        .slide-info .people{
+            padding: 6px;
+            background: red;
+            color: white;
+            text-transform: capitalize;
+            float: left;
+        }
+
+        .slide-info .name-people{
+               color: grey;
+        }
+
+/*
+   end  slide
+*/
+     .abmum{
+        padding-top: 36px;
+        padding-bottom: 53px;
+        background-color: #f6f6f6;
+
+     }
+
+     .abmum-1{
+            width: 537px  !important;
+            position: relative;
+     }
+
+     .trip{
+        padding: 12px;
+        background: #d90445;
+        position: absolute;
+        bottom: 131px;
+        color: white;
+     }
+
+     .tech{
+        padding: 12px;
+        background: #000000;
+        position: absolute;
+        bottom: 131px;    
+        color:white;
+    }
+     .content-abmum{
+         margin-top: 20px;
+         width: 548px !important;
+     }
+    /*
+      end abum  
+    */
+
+    .proin{
+        margin-top: 46px;
+    }
+    .slide-proin{
+         position: relative;
+    }
+    .content-proin{
+        position: absolute;
+        width: 1110px;
+        height: 189px;
+        bottom: 0px;
+    }
+
+    .content-proin .title-proin{
+    text-align: center;
+    color: white;
+    font-size: 35px;
+    }
+    .content-proin .noidung-proin{
+        color:white;
+    }
+
+    .proin-info{
+          margin-top: 27px;
+    }
+    .proin-info .proin-trip{
+        padding: 12px;
+        background: #d90445;
+        color: white;
+    }
+
+     .proin-info .name-proin{
+        color: white;
+        margin-right: 19px;
+        margin-top: -19px;
+
+    }
+
+    /*
+        end proin
+    */
+    .abum-1{
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+    .abmum-slide-1{
+        width: 357px !important;
+        position: relative;
+        object-fit: cover;
+    }
+
+    .content-abmum-1 .title-abum-1{
+        position: absolute;
+        bottom: 120px;
+        padding: 10px;
+        color: white;
+    }
+    .content-abmum-1 .green{
+        background: #58b600;
+    }
+
+    .content-abmum-1 .blue{
+       background-color:#1a54e7;
+    }
+
+    .content-abmum-1 .color-4{
+         background-color: #d90445;
+    }
+
+    .content-abmum-1 .color-6{
+           background-color: #8200b2;
+    }
+
+    .content-abmum-1 .back{
+        background-color: #000000;
+    }
+
+    .content-abmum-1 .noidung-abum-1{
+        width: 357px !important;
+        font-weight: bold;
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+    }
+    .content-abmum-1 .info-abum-1{
+        width: 357px !important;
+    }
+
+    /*
+       end abum-1
+    */
+
+    .screach{
+           background-image: url('../image/banner.jpg');
+           width: 100%;
+           height: 421px;
+    }
+
+    .info-sreach .title-sreach{
+        
+    text-align:  center;
+    margin-top:  102px;
+    font-size: 37px;
+    color: white;
+    text-transform: capitalize;
+    }
+
+    .info-sreach .content-screach{
+          color: grey;
+    }
+    .info-sreach .form-screach{
+         margin-top: 50px;
+    }
+
+    .form-screach .form{
+          width: 70%;
+          margin-left: 17%;
+    }
+
+    .form-screach .form .fix-input{
+        border-radius: 25px;
+        background: #2c6cff;
+     position: relative;
+        z-index: 1;
+    }
+
+    .form-screach .form .input-group-append .btn-button-fix{
+        border-radius: 25px;
+        right: 0px;
+        position: absolute;
+        background: white;
+        color: blue;
+        border-style: none;
+        padding: 7px 23px;
+    }
+    /*
+      end screach
+    */
+    
+    .footer{
+        height: 342px;
+    }
+
+    .paddTop-79-footer{
+        padding-top: 79px;
+    }
+     
+    /*end footer*/
+

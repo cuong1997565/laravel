@@ -1,0 +1,20 @@
+.detail .title{
+      color:#D3E4FFFF;
+      padding: 20px;
+      background:#4097AAFF;
+      text-align: center;
+      font-size: 20px;
+      text-transform: capitalize;
+}
+
+.detail .td-block-12{
+        width: 100%;
+        margin-top: 33px;
+        margin-bottom: 20px;
+}
+
+.detail .td-block-12 .img-detail img{
+        width: 137px;
+        float: left;
+        margin-right: 20px;
+}

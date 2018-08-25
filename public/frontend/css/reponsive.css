@@ -1,0 +1,340 @@
+@media all and (max-width: 1024px) {
+    .logo{
+        padding-left: 230px;
+    }
+    .content{
+        position: absolute;
+        width: 1024px;
+        height: auto;
+        top: 6%;
+        left: 2%;
+    }
+    .slide-info .name-people{
+              padding-right: 38px;
+
+    }
+    /*end slide*/
+
+    .abmum-1{
+        width: 449px  !important;
+    }
+
+    .content-abmum{
+        width: 465px  !important;
+    }
+
+  .name-abum{
+        width: 465px !important;
+    }
+
+    /* end abum */
+
+   .content-proin{
+    width: 1024px;
+   }
+   .proin-info .name-proin{
+    margin-right: 100px;
+    margin-top: -19px;
+   }
+
+   /*end proin*/
+
+   .abmum-slide-1{
+    width: 294px !important;
+   }
+
+   .content-abmum-1 .noidung-abum-1{
+      width: 294px !important;
+}
+
+    /*
+         end abum-1
+    */
+
+
+
+    
+}
+
+@media all and (max-width: 768px) {
+.logo{
+    padding-left: 30px;
+}
+
+.content{
+    position: absolute;
+    width: 768px;
+    height: auto;
+    top: 0;
+    left: 0;
+    top: 5%;
+}
+        .noidung{
+            font-size: 17px;
+        }
+
+    .slide-info{
+        margin-top: 6%;
+
+            }
+    
+      .slide-info .people{
+        margin-left: 46px;
+    }
+    .slide-info .name-people{
+        padding-right: 57px;
+        
+    }
+     /*
+       slide
+     */
+    .abmum-1{
+        width: 329px !important;
+    }
+
+    .content-abmum{
+        width: 345px !important;
+    }
+    .name-abum{
+        width: 345px !important;
+    }
+    /*
+        abum
+    */
+
+
+    .content-proin{
+        width: 768px;
+       }
+       .content-proin .title-proin{
+        font-size: 30px;
+    }
+    .proin-info .name-proin{
+        margin-right: 88px;        
+       }
+    
+    /*
+      proin
+    */
+
+    .abmum-slide-1{
+         width: 21em !important;
+    }
+
+    /*
+        abum-1
+    */
+    
+}
+
+@media all and (max-width:425px){
+.content{
+    width: 425px;
+}
+#anh-slide{
+    width:45px;
+}
+
+
+.abmum-1{
+    width: 25em !important;
+}
+
+.content-abmum{
+    width: 25em !important;
+}
+
+.name-abum,.content-abmum{
+    text-align: center;
+}
+/*abum*/
+.content-proin{
+     width: 425px !important;
+}
+.slide-proin{
+    width: 25em;
+    height: 200px;
+}
+.proin-info .name-proin{
+      margin-right: 50px;
+}
+.marBott-10{
+    margin-bottom: 10px;
+}
+/*proin*/
+
+    .abmum-slide-1{
+        width: 25em !important;
+    }
+
+    .content-abmum-1 .noidung-abum-1{
+          width: 25em!important;
+          text-align: center;
+    }
+    .content-abmum-1 .info-abum-1{
+        text-align: center;
+    }
+
+/*
+    abum-1
+*/
+
+}
+
+@media all and (max-width:375px){
+.content{
+    position: absolute;
+    width: 375px;
+ 
+}
+
+#anh-slide{
+    width:45px;
+}
+
+.noidung{
+    font-size: 15px;
+}
+.slide-info{
+     margin-top: 2%;
+}
+.slide-info .people{
+    margin-left: 16px;
+
+}
+/*slide*/
+.abmum-1{
+    width: 22em !important;
+}
+
+.content-abmum{
+    width: 22em !important;
+}
+.name-abum,.content-abmum{
+    text-align: center;
+}
+/*abum*/
+
+.slide-proin{
+    width: 22em;
+    height: 189px;
+}
+
+.content-proin {
+    width: 375px !important;
+}
+.content-proin .title-proin {
+    font-size: 18px;
+}
+
+.proin-info .name-proin{
+    margin-right: 35px;
+
+
+}
+
+/*proin*/
+.marBott-10{
+    margin-bottom: 10px;
+}
+/*abum*/
+
+.abmum-slide-1{
+    width: 22em !important;     
+}
+.content-abmum-1 .noidung-abum-1{
+    width: 22em!important;
+}
+
+}
+@media all and (max-width:320px){
+    .navbar-collapse #menu2 .nav-item .nav-link{
+            text-align: center;
+    }
+
+        /* end menu */
+
+.logo{
+    padding-left: 30px;
+}
+
+.content{
+    position: absolute;
+    width: 320px;
+    height: auto;
+    top: 0;
+    left: 0;
+    top: 2%;
+}
+
+#anh-slide{
+    width:43px;
+    }
+
+    .noidung{
+    font-size: 9px;
+    }
+
+    .slide-info{
+        margin-top: 2%;
+        margin-left: 3%;
+            }
+
+      .slide-info .people{
+        padding: 2px;
+        margin-left: 5px;
+    }
+    .slide-info .name-people{
+            padding-right: 10px;
+    }
+    /*
+        end slide
+    */
+
+    .content-proin{
+        width: 320px !important;
+    }
+    
+    .abmum-1{
+        width: 18em !important;
+    }
+
+    .content-abmum{
+        width: 18em !important;
+    }
+    .name-abum{
+       width: 300px !important
+    }
+    .name-abum,.content-abmum{
+        text-align: center;
+    }
+
+    /*end abum*/
+
+
+    .content-proin{
+        width: 320px;
+    }
+
+    .marBott-10{
+        margin-bottom: 10px;
+    }
+
+    .abmum-slide-1{
+        width: 18em !important;     
+    }
+    .content-abmum-1 .noidung-abum-1{
+        width: 18em!important;
+    }
+
+
+    /* end abum1 */
+
+    .form-screach .form .input-group-append .btn-button-fix{
+     
+        padding: 7px 14px;
+    }
+
+    /*end sreach*/
+}
+
