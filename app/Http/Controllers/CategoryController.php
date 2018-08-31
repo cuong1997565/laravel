@@ -24,11 +24,9 @@ class CategoryController extends Controller
     public function index()
     {
         $datalist= $this->categoryRepository->getAll();
-
-
-        //$json =  response()->json($datalist);
-        // return $json;
-       return view('backend.category',compact('datalist'));
+        $json =  response()->json($datalist);
+        return $json;
+       // return view('backend.category',compact('datalist'));
     }
 
     /**
@@ -50,13 +48,13 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
-            $name = $request->name;
-            $color = $request->color;
-            $data = [
-                'name' => $name,
-                'color' => $color
-            ];
-            $add = $this->categoryRepository->create($data);
+            // $name = $request->name;
+            // $color = $request->color;
+            // $data = [
+            //     'name' => $name,
+            //     'color' => $color
+            // ];
+            $add = $this->categoryRepository->create($request->all());
             $json = response()->json($add);
             return $json;
     }
@@ -70,8 +68,9 @@ class CategoryController extends Controller
     public function show($id)
     {
            $show = $this->categoryRepository->find($id);
-           //$json = response()->json($show);
-           return view('backend.editcategory',compact('show'));
+           $json = response()->json($show);
+            return $json;
+
     }
 
     /**
@@ -82,7 +81,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+             $show = $this->categoryRepository->find($id);
+           $json = response()->json($show);
+            return $json;
     }
 
     /**

@@ -30,7 +30,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(category, index) in categoryvue">
+        <tr v-for="(category, index) in allCategories">
           <td>{{ index + 1 }}</td>
           <td>{{ category.name }}</td>
           <td>{{ category.color }}</td>
@@ -39,7 +39,7 @@
           <td>
             <router-link class="btn btn-info btn-xs" v-bind:to="{name: 'ViewCategory', params: {id: category.id}}"><i class="fa fa-eye" aria-hidden="true"></i> Show</router-link>
             <router-link class="btn btn-warning btn-xs" v-bind:to="{name: 'EditCategory', params: {id: category.id}}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</router-link>
-            <router-link class="btn btn-danger btn-xs" v-bind:to="{name: 'DeleteCategory', params: {id: category.id}}"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</router-link>
+           <a  @click="deleteCategory(category.id)" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
           </td>
         </tr>
       </tbody>
@@ -48,22 +48,49 @@
 </template>
 
 <script>
+
+  import { mapActions,mapGetters } from 'vuex';
+
+
 export default {
       data:function(){
         return {category: ''};
       },
-      created: function() {
-        let url = 'http://blog.test/category';
-        Axios.get(url).then((response) => {
-          this.category = response.data;
-        });
-      },
-  computed: {
-    categoryvue: function(){
-      if(this.category.length) {
-        return this.category;
-      }
-    }
+
+   mounted () {
+    this.$store.dispatch('getCategory')
+  },
+
+   computed: {
+        ...mapGetters(['allCategories'])
+    },
+
+  methods:{
+         ...mapActions(['removeCategory']),
+        // filter: debounce(function () {
+        //     this.categories({params: this.filters})
+        // }, 500),
+
+     deleteCategory (id) {
+
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this imaginary file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((result) => {
+                if (result) {
+                  swal("Your not delete category", {
+                    icon: "success",
+                  });
+                   this.removeCategory(id)
+                } else {
+                  swal("Your delete category !");
+                }
+              });
+        }
   }
 }
 </script>

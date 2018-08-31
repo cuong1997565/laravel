@@ -2,8 +2,12 @@
     <form v-on:submit.prevent = "formSubmit">
              <div class="form-group">
                 <label for="add-name">image</label>
-                <input id="add-name" type="file" name="name"  class="form-control" @change="imageChanged"  />
-                   <img width="150px" v-if="dataSlide.image" :src="'../image/'+dataSlide.image" />
+               <!--  <input id="add-name" type="file" name="name"  class="form-control" @change="imageChanged"  />
+                <img width="150px" v-if="dataSlide.image" :src="'../image/'+dataSlide.image" /> -->
+            <input type="file" @change="imageChanged" id="add-name"  name="name" >
+            <img id="output" v-if="dataSlide.id >0" :src="'../image/'+dataSlide.image"/>
+            <img id="output" v-else />
+
 
               </div>
 
@@ -56,15 +60,24 @@
                 let blog = Object.assign({}, this.slide)
                 this.$emit('submit',blog);
             },
-            imageChanged(e){
-                // console.log(e.target.files[0]);
-                  var fileReader = new FileReader();
-                  fileReader.readAsDataURL(e.target.files[0]);
-                  fileReader.onload = (e) =>{
-                       // this.slide.image = e.target.files[0].name
-                       this.slide.image = e.target.result;
-                       this.slide.check = 1;
-                   }
+            imageChanged(event){
+                 console.log(event.target.files[0].name);
+                  // var fileReader = new FileReader();
+                  // fileReader.readAsDataURL(e.target.files[0]);
+                  // fileReader.onload = (e) =>{
+                  //      // this.slide.image = e.target.files[0].name
+                  //      this.slide.image = e.target.result;
+                  //      this.slide.check = 1;
+                  //  }
+                  this.slide.image = event.target.files[0].name;
+                   var reader = new FileReader();
+                  reader.onload = (e) =>{
+                    this.slide.image = event.target.files[0].name;
+                    var output = document.getElementById('output');
+                    output.src = reader.result;
+                  };
+                  reader.readAsDataURL(event.target.files[0]);
+
             }
 
         },

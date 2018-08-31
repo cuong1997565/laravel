@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
     export default{
         data : function(){
              return { category:
@@ -21,13 +23,20 @@
              }}
         },
 
-        created: function(){
-              let url = 'http://blog.test/category/'+this.$route.params.id;
-              Axios.get(url).then( (response) =>{
-                        this.category = response.data;
-              });
+        methods:{
+         ...mapActions(['getCategory']),
+          },
 
-        }
 
+
+       mounted() {
+
+          this.getCategory({
+              id: this.$route.params.id,
+              cb: (category) =>{
+                   this.category = Object.assign({},this.category,category)
+              }
+          })
+    }
     }
 </script>

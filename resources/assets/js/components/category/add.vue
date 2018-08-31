@@ -7,19 +7,27 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import formAddCategory from './form.vue'
 
     export default{
     components: {
        formAddCategory
      },
-      methods:{
-          formSubmit: function(blog){
-                let url = "http://blog.test/category";
-                Axios.post( url , blog).then((response)=>{
-                      this.$router.push({name: 'Listcategory'});
-                });
-          }
-     }
+
+       methods: {
+        ...mapActions(['pushCategory']),
+
+        formSubmit(category){
+
+           this.pushCategory({
+              category: category,
+              cb: () =>{
+                      this.$router.push({name: 'Category'})
+              }
+           })
+
+        }
+    }
     }
 </script>

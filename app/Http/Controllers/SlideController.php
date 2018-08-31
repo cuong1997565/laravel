@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Slide;
 use Validator;
 use App\Repositories\Slide\SlideRepositoryInterface;
+use File;
 
 
 
@@ -26,7 +27,7 @@ class SlideController extends Controller
     {
 
            $dataslide = $this->slideRepository->getAll();
-            return view('backend.slide',compact('dataslide'));
+           return response()->json($dataslide);
     }
 
     /**
@@ -47,16 +48,35 @@ class SlideController extends Controller
      */
     public function store(Request $request)
     {
+        // $exploded = explode(',',$request->image);
+        // $decoded = base64_decode($exploded[1]);
+        // if(str_contains($exploded[0],'jpeg')){
+        //       $extension = 'jpg';
+        // }
+        // else{
+        //       $extension = 'png';
+        // }
 
-        $image = $request->file->getClientOriginalName();
-        $status = $request->status;
+        // $fileName = str_random(10).'.'.$extension;
+        // $path = public_path()."/".'image/'.$fileName;
+        // file_put_contents($path , $decoded);
+        // $data = [
+        //         'image' => $fileName,
+        //         'status' => $request->status
+        //  ];
 
-        $data =[
-            'image' => $image,
-            'status' => $status
-        ];
-        $post = $this->slideRepository->create($data);
-        return response()->json($post);
+        //  $image = $this->slideRepository->create($data);
+        //  return response()->json(['statur' => 'success','msg' => 'slide created success']);
+        //
+        //
+        //
+
+        $data = [
+                'image' => $request->image,
+                'status' => $request->status
+         ];
+        $image = $this->slideRepository->create($data);
+         return response()->json(['statur' => 'success','msg' => 'slide created success']);
     }
 
     /**
@@ -67,11 +87,8 @@ class SlideController extends Controller
      */
     public function show(Request $request,$id)
     {
-
          $slide = $this->slideRepository->find($id);
-         return view('backend.edit',compact('slide'));
-
-
+         return response()->json($slide);
     }
 
     /**
@@ -94,16 +111,50 @@ class SlideController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $image = $request->file->getClientOriginalName();
-        $status = $request->status;
+        // $explode = explode(',' , $request->image);
+        // if(count($explode)>1){
+        //     $decoded = base64_decode($explode[1]);
 
-        $data =[
-            'image' => $image,
-            'status' => $status
-        ];
+        //   if(str_contains($explode[0],'jpeg')){
+        //        $extension = 'jpg';
+        //   }
+        //   else{
+        //       $extension = 'png';
+        //   }
 
-        $post = $this->slideRepository->update($id, $data);
-        return response()->json($post);
+        //   $fileName = str_random(10).'.'.$extension;
+        //   $path = public_path()."/".'image/'.$fileName;
+        //   file_put_contents($path, $decoded);
+        //   $data =  $this->slideRepository->find($id);
+        //   $path = public_path()."/".'image/'.$data->image;
+        //         if(File::exists($path)){
+        //             File::delete($path);
+        //         }else{
+        //             return 'file does not exit';
+        //         }
+        // }
+        // else{
+        //        $fileName = $request->image;
+        // }
+
+        // $data = [
+        //     "image" => $fileName,
+        //     "status" => $request->status
+        // ];
+
+        //   $update = $this->slideRepository->update($id,$data);
+        //   return response()->json($update);
+        //
+        $data = [
+                'image' => $request->image,
+                'status' => $request->status
+         ];
+
+            $update = $this->slideRepository->update($id,$data);
+          return response()->json($update);
+
+
+
 
     /**
      * Remove the specified resource from storage.

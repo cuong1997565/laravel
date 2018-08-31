@@ -6,7 +6,7 @@
 </template>
 
 <script type="text/javascript">
-
+import { mapActions } from 'vuex'
 import formEdit from './form.vue'
     export default{
          components: {
@@ -20,20 +20,26 @@ import formEdit from './form.vue'
         }
 
          },
-         created: function(){
-            let url = 'http://blog.test/category/'+this.$route.params.id+'/edit';
-             Axios.get(url).then((response) =>{
-             this.category = response.data;
-            });
-         },
-
-        methods:{
-         formUpdate: function(blog) {
-              let url = 'http://blog.test/category/'+this.$route.params.id;
-              Axios.patch(url, blog).then((response) => {
-              this.$router.push({name: 'Listcategory'})
-         })
-            }
+         methods: {
+        ...mapActions(['pushCategory','getCategoryEdit']),
+           formUpdate(category){
+            this.pushCategory({
+                  category : category,
+                  cb: () =>{
+                      this.$router.push({name: 'Category'})
+                  }
+            })
         }
+    },
+
+
+    mounted() {
+        this.getCategoryEdit({
+            id: this.$route.params.id,
+            cb: (category) => {
+                this.category = Object.assign({}, this.category, category)
+            }
+        })
+    }
     }
 </script>

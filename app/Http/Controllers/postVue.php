@@ -44,18 +44,18 @@ class postVue extends Controller
      */
     public function store(Request $request)
     {
-        $explode = explode(',',$request->image);
-        $decoded = base64_decode($explode[1]);
-        if(str_contains($explode[0],'jpeg')){
-                $extension = 'jpg';
-        }
-        else{
-                $extension = 'png';
-        }
+        // $explode = explode(',',$request->image);
+        // $decoded = base64_decode($explode[1]);
+        // if(str_contains($explode[0],'jpeg')){
+        //         $extension = 'jpg';
+        // }
+        // else{
+        //         $extension = 'png';
+        // }
 
-        $fileName = str_random(8).'.'.$extension;
-        $path = public_path()."/".'image/'.$fileName;
-        file_put_contents($path,$decoded);
+        // $fileName = str_random(8).'.'.$extension;
+        // $path = public_path()."/".'image/'.$fileName;
+        // file_put_contents($path,$decoded);
 
         $data = [
             'title' => $request->title,
@@ -65,11 +65,12 @@ class postVue extends Controller
             'status' =>$request->status,
             'hot' =>$request->hot,
             'author_id'=>$request->user_id
-
         ];
 
-        $addpost = $this->postRepository->create($data);
-        return response()->json($addpost);
+        dd($request->all());
+
+        // $addpost = $this->postRepository->create($data);
+        // return response()->json($addpost);
 
     }
 

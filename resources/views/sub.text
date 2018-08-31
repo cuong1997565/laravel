@@ -1,0 +1,113 @@
+import Vue from 'vue'
+ import Vuex from 'vuex'
+// import axios from 'axios'
+
+Vue.use(Vuex);
+
+var store = new Vuex.Store({
+  state: {
+    categories: [],
+  category: {},
+    // count: 1,
+  },
+
+  actions: {
+
+
+    LOAD_CATEGORY ({ commit }) {
+      if (this.getters.categories.length == 0) {
+        axios.get('/api/listcategory')
+        .then(response => {
+          commit('SET_CATEGORY', { list: response.data })
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+    },
+
+async pushCategory({ commit }, payload) {
+    const { category, cb } = payload || {}
+
+    try{
+
+        let response = null
+       if (category.id) {
+            response = await axios.put('/api/editcategory/'+category.id, category);
+
+       }else{
+           response = await axios.post('/api/addcategory',category);
+       }
+       cb && cb(response.data.data)
+    }
+    catch(error){
+          console.log(error)
+    }
+
+  },
+
+  async removeCategory({commit} , id ){
+
+         try{
+            await axios.delete('/api/deletecategory/'+id);
+            commit(Remove_Category,id)
+         }catch(err){
+            console.log(err);
+         }
+
+  },
+
+
+  async getCategory({ commit }, payload) {
+    const { id, cb } = payload || {}
+    console.log(id);
+    console.log(cb);
+    // if (id) {
+    //   try {
+    //     let category = await axios.get('/api/editcategory/'+id)
+    //     commit('SET_DETAIL_CATEGORY',{category : category.data})
+    //     cb && cb(category.data)
+    //   } catch(err) {
+    //     console.log(err);
+    //   }
+    // }
+  }
+
+  },
+
+  mutations: {
+    SET_CATEGORY: (state, { list }) => {
+      state.categories = list
+    },
+
+  SET_DETAIL_CATEGORY: (state, category) =>{
+    state.category = category
+  },
+
+
+  Remove_Category: (state , id)=>{
+      let i = this.state.categories.map(item => item.id).indexOf(id)
+      state.categories.slice(i, 1);
+  }
+  },
+
+  getters: {
+    // categories(state) {
+    //   return state.categories
+    // },
+
+      categories: (state) => state.categories,
+
+
+   categoryDetail(state) {
+       return state.category;
+   }
+
+
+    // counter(state) {
+    //   return state.count
+    // },
+  }
+})
+
+export default store

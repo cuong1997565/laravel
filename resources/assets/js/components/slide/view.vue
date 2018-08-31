@@ -1,6 +1,6 @@
 <template id="post">
       <div>
-            <img width="150px" :src="'../image/'+slide.image"  alt="">
+               <img :src="'../image/'+slide.image" alt="">
             <div>
               <strong>status: </strong>
                  <span v-if="slide.status ==1">Hien thi</span>
@@ -13,6 +13,7 @@
 </template>
 
 <script type="text/javascript">
+      import { mapActions } from 'vuex'
     export default{
             data: function(){
                 return {
@@ -22,11 +23,17 @@
                     }
                 }
             },
-            created:function(){
-                let url = 'http://blog.test/slide/'+this.$route.params.id;
-                Axios.get(url).then((response)=>{
-                        this.slide = response.data;
-                });
+            methods:{
+           ...mapActions(['getSlideEdit'])
+            },
+            mounted(){
+                this.getSlideEdit({
+                id: this.$route.params.id,
+                cb : (slide) =>{
+                     this.slide = Object.assign({}, this.slide,slide)
+                }
+            })
             }
+
     }
 </script>

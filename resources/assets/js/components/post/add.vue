@@ -1,8 +1,9 @@
 <template>
-      <addPost @submit="formSubmit"></addPost>
+      <addPost @submit="formSubmit" :dataCategory="allCategories"></addPost>
 </template>
 
 <script>
+import { mapActions,mapGetters } from 'vuex'
 import addPost from './form-post.vue';
     export default{
        components : {
@@ -22,15 +23,23 @@ import addPost from './form-post.vue';
                  categories   : []
            }
         },
+        mounted(){
+             this.$store.dispatch('getCategory')
+        },
+        computed:{
+                  ...mapGetters(['allCategories']),
+
+                },
         methods:{
-
+        ...mapActions(['pushBlogs']),
             formSubmit(blog){
-                  let url = 'http://blog.test/post';
-                  Axios.post(url , blog).then((response)=>{
-                        this.$router.push({name: 'Listpost'});
-                 });
-
-            }
+            this.pushBlogs({
+                blog : blog,
+                cb: () =>{
+                      this.$router.push({name: 'Category'})
+                 }
+            })
+          }
 
 
 

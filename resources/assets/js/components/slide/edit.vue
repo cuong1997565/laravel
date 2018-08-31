@@ -6,7 +6,7 @@
 </template>
 
 <script type="text/javascript">
-
+ import { mapActions } from 'vuex'
 import editSlide from './form-data.vue'
     export default{
          components: {
@@ -20,20 +20,25 @@ import editSlide from './form-data.vue'
         }
 
          },
-         created: function(){
-            let url = 'http://blog.test/slide/'+this.$route.params.id+'/edit';
-             Axios.get(url).then((response) =>{
-             this.slide = response.data;
-            });
-         },
-
         methods:{
-               formUpdate: function(blog) {
-                      let url = 'http://blog.test/slide/'+this.$route.params.id;
-                      Axios.patch(url, blog).then((response) => {
-                      this.$router.push({name: 'Listslide'})
-                  })
+         ...mapActions(['pushSlide' , 'getSlideEdit']),
+            formUpdate: function(slide) {
+                this.pushSlide({
+                    slide: slide,
+                    cb : () =>{
+                       this.$router.push({name: 'Listslide'})
+                    }
+                })
              }
-        }
+        },
+        mounted(){
+            this.getSlideEdit({
+                id: this.$route.params.id,
+              cb: (slide) =>{
+                this.slide = Object.assign({}, this.slide,slide)
+              }
+            })
+        },
+
     }
 </script>

@@ -20,7 +20,7 @@
                       <label>category</label>
                     <select  class="form-control" v-model="post.category_id">
                       <option disabled value="">Please select one</option>
-                      <option v-for="(category , index ) in categorySelect" :value="category.id" :key="index"  > {{category.name}} </option>
+                      <option v-for="(category , index ) in dataCategory" :value="category.id" :key="index"> {{category.name}} </option>
                     </select>
                 </div>
 
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+  import { mapActions , mapGetters } from 'vuex';
     export default{
         data:function(){
            return {
@@ -71,6 +72,9 @@
             type: String,
             default: 'create'
         },
+          dataCategory:{
+
+              },
     dataPost: {
             type: Object,
             default: () => {
@@ -86,15 +90,11 @@
 
                    }
                 }
-            }
+            },
+
           },
         methods:{
-            categoryId(){
-               let url = 'http://blog.test/category'
-               Axios.get(url).then((response)=>{
-                    this.categories = response.data;
-               });
-           },
+
             imageChanged(e){
                   var fileReader = new FileReader();
                   fileReader.readAsDataURL(e.target.files[0]);
@@ -110,23 +110,13 @@
             }
         },
 
+
+
           created(){
-           let url = 'http://blog.test/category'
-               Axios.get(url).then((response)=>{
-                    this.categories = response.data;
-               });
-            this.post =Object.assign({} , this.post ,this.dataPost)
-          },
 
+               this.post =Object.assign({} , this.post ,this.dataPost,this.dataCategory)
+          }
 
-
-        computed : {
-          categorySelect : function(){
-                 if(this.categories.length){
-                     return this.categories;
-                 }
-            }
-        },
 
 
     }

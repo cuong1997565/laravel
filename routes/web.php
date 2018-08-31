@@ -59,3 +59,10 @@ Route::resource('/post','postVue');
 
 Route::get('/admin', 'ProfileController@index')->name('profile');
 Route::get('/admin/{any}', 'ProfileController@index')->where('any', '.*');
+
+
+Route::get('/admin',function(){
+        return view('admin.index');
+})->name('admin.index');
+
+Route::resource('role','RoleController');

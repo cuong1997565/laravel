@@ -19,19 +19,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  Route::get('listslide','SlideController@index');
  Route::post('addslide','SlideController@store')->name('post.addslide');
  Route::get('editslide/{id}','SlideController@show')->name('post.edit');
- Route::post('editslide/{id}','SlideController@update')->name('post.update');
- Route::get('delete/{id}','SlideController@destroy')->name('post.delete');
+ Route::put('editslide/{id}','SlideController@update')->name('post.update');
+ Route::delete('deleteslide/{id}','SlideController@destroy')->name('post.delete');
 
 //category
  Route::get('listcategory','CategoryController@index');
- Route::post('addcategory','CategoryController@store')->name('addcategory');
+ Route::post('addcategory','CategoryController@store')->name('addcate');
  Route::get('editcategory/{id}','CategoryController@show')->name('idcategory');
- Route::post('editcategory/{id}','CategoryController@update')->name('updatecategory');
- Route::get('deletecategory/{id}','CategoryController@destroy')->name('deletecate');
+ Route::put('editcategory/{id}','CategoryController@update')->name('updatecategory');
+ Route::delete('deletecategory/{id}','CategoryController@destroy')->name('deletecate');
 
  ///post
  Route::resource('listpost','PostController');
  Route::post('addpost','PostController@store')->name('addpostapi');
  Route::get('editpost/{id}','PostController@show')->name('findpost');
- Route::post('editpost/{id}','PostController@update')->name('updatepost');
-Route::get('deletepost/{id}','PostController@destroy')->name('delete');
+ Route::put('editpost/{id}','PostController@update')->name('updatepost');
+Route::delete('deletepost/{id}','PostController@destroy')->name('delete');

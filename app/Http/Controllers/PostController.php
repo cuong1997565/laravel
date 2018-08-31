@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Repositories\Post\PostRepositoryInterface;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
+use File;
+
 
 
 class PostController extends Controller
@@ -28,8 +30,11 @@ class PostController extends Controller
     public function index()
     {
         $datapost = $this->postRepository->getAll();
-        $datacategory = $this->categoryRepository->getAll();
-        return view('backend.post',compact('datapost','datacategory'));
+        // $datacategory = $this->categoryRepository->getAll();
+
+
+        $json =  response()->json($datapost);
+        return $json;
     }
 
     /**
@@ -41,7 +46,7 @@ class PostController extends Controller
     {
         $category = $this->categoryRepository->getAll();
         $datauser = $this->userRepository->getAll();
-          return view('backend.addpost',compact('category','datauser'));
+          // return view('backend.addpost',compact('category','datauser'));
     }
 
     /**
@@ -52,25 +57,32 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-         $image     = $request->file->getClientOriginalName();
-         $title     = $request->title;
-         $content   = $request->content;
-         $category  = $request->category;
-         $status    = $request->status;
-         $hot       = $request->hot;
-         $author    = $request->author;
-         $data = [
-            'image' => $image,
-            'title' => $title,
-            'content' => $content,
-            'category_id' => $category,
-            'status' => $status,
-            'hot' => $hot,
-            'author_id' => $author
-         ];
+        $explode = explode(',' , $request->image);
+        $decoded = base64_decode($explode[1]);
 
-         $add = $this->postRepository->create($data);
-         return response()->json($add);
+        if(str_contains($explode[0], 'jpeg')){
+               $extension = 'jpg';
+        }
+        else{
+               $extension = 'png';
+        }
+
+        $fileName = str_random(10).'.'.$extension;
+        $path = public_path()."/".'image/'.$fileName;
+        file_put_contents($path,$decoded);
+
+        $data = [
+            'title' => $request->title,
+            'content' => $request->content,
+            'image' => $fileName,
+            'category_id' => $request->category_id,
+            'status' =>$request->status,
+            'hot' =>$request->hot,
+            'author_id'=>$request->user_id
+        ];
+
+        $addpost = $this->postRepository->create($data);
+        return response()->json($addpost);
     }
 
     /**
@@ -81,10 +93,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = $this->postRepository->find($id);
-        $category = $this->categoryRepository->getAll();
-        $datauser = $this->userRepository->getAll();
-        return view('backend.editpost',compact('post','category','datauser'));
+         $post = $this->postRepository->find($id);
+         $json = response()->json($post);
+         return $json;
     }
 
     /**
@@ -96,6 +107,10 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+         $post = $this->postRepository->find($id);
+         $json = response()->json($post);
+         return $json;
+
     }
 
     /**
@@ -107,25 +122,44 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $image     = $request->file->getClientOriginalName();
-         $title     = $request->title;
-         $content   = $request->content;
-         $category  = $request->category;
-         $status    = $request->status;
-         $hot       = $request->hot;
-         $author    = $request->author;
-         $data = [
-            'image' => $image,
-            'title' => $title,
-            'content' => $content,
-            'category_id' => $category,
-            'status' => $status,
-            'hot' => $hot,
-            'author_id' => $author
-         ];
+        $explode = explode(',' , $request->image);
+        if(count($explode)>1){
+            $decoded = base64_decode($explode[1]);
 
-         $update = $this->postRepository->update($id,$data);
-         return response()->json($update);
+          if(str_contains($explode[0],'jpeg')){
+               $extension = 'jpg';
+          }
+          else{
+              $extension = 'png';
+          }
+
+          $fileName = str_random(10).'.'.$extension;
+          $path = public_path()."/".'image/'.$fileName;
+          file_put_contents($path, $decoded);
+          $data =  $this->postRepository->find($id);
+          $path = public_path()."/".'image/'.$data->image;
+                if(File::exists($path)){
+                    File::delete($path);
+                }else{
+                    return 'file does not exit';
+                }
+        }
+        else{
+           $fileName = $request->image;
+        }
+          $data = [
+                        'title' => $request->title,
+                        'content' => $request->content,
+                        'image' => $fileName,
+                        'category_id' => $request->category_id,
+                        'status' =>$request->status,
+                        'hot' =>$request->hot,
+                        'author_id'=>$request->user_id
+
+          ];
+
+          $update = $this->postRepository->update($id,$data);
+          return response()->json($update);
     }
 
     /**
@@ -136,8 +170,22 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $delete = $this->postRepository->delete($id);
-        return response()->json($delete);
+        // $delete = $this->postRepository->delete($id);
+        // return response()->json($delete);
+        //
+      $blog = $this->postRepository->find($id);
+           if(count($blog)){
+            $path = public_path()."/".'image/'.$blog->image;
+             if(File::exists($path)){
+                 File::delete($path);
+            $data = $this->postRepository->delete($id);
+            return response()->json($data);
+              }else{
 
+                return 'File does not exists.' ;
+
+              }
+
+           }
     }
 }

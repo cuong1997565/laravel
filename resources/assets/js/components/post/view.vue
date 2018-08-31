@@ -37,6 +37,7 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
     export default{
             data:function(){
                 return {
@@ -45,11 +46,16 @@
                      }
                 }
             },
+            methods:{
+              ...mapActions(['getBlogsEdit'])
+            },
             created:function(){
-                let url = 'http://blog.test/post/'+this.$route.params.id;
-                Axios.get(url).then((response)=>{
-                      this.post = response.data;
-                });
+              this.getBlogsEdit({
+                  id: this.$route.params.id,
+                  cb: (blog)=>{
+                        this.post = Object.assign({}, this.post, blog)
+                  }
+              })
             }
     }
 </script>

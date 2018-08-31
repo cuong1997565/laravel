@@ -147,7 +147,6 @@ class SlideVueController extends Controller
            $slide = $this->slideRepository->find($id);
            if(count($slide)){
             $path = public_path()."/".'image/'.$slide->image;
-
              if(File::exists($path)){
                  File::delete($path);
             $data = $this->slideRepository->delete($id);

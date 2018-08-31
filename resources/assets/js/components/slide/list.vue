@@ -20,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(slide, index) in slidevue">
+        <tr v-for="(slide, index) in allSlide">
           <td>{{ index + 1 }}</td>
           <td>
             <img width="100px" :src="'../image/'+slide.image" alt="">
@@ -35,7 +35,7 @@
           <td>
             <router-link class="btn btn-info btn-xs" v-bind:to="{name: 'Viewslide', params: {id: slide.id}}"><i class="fa fa-eye" aria-hidden="true"></i> Show</router-link>
             <router-link class="btn btn-warning btn-xs" v-bind:to="{name: 'Editslide', params: {id: slide.id}}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</router-link>
-            <router-link class="btn btn-danger btn-xs" v-bind:to="{name: 'Deleteslide', params: {id: slide.id}}"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</router-link>
+           <a  @click="deleteSlide(slide.id)" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
           </td>
         </tr>
       </tbody>
@@ -44,24 +44,41 @@
 </template>
 
 <script type="text/javascript">
+  import { mapActions,mapGetters,} from 'vuex';
     export default{
          data:function(){
         return {slide: ''};
       },
-      created: function() {
-        let url = 'http://blog.test/slide';
-        Axios.get(url).then((response) => {
-          this.slide = response.data;
-        });
-      },
-  computed: {
-     slidevue: function(){
-      if(this.slide.length) {
-        return this.slide;
-      }
-    }
-  }
 
+      mounted() {
+             this.$store.dispatch('getSlide')
+      },
+
+      computed: {
+            ...mapGetters(['allSlide'])
+      },
+      methods:{
+              ...mapActions(['removeSlide']),
+        deleteSlide(id){
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this imaginary file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((result) => {
+                if (result) {
+                  swal("Your not delete category", {
+                    icon: "success",
+                  });
+                  this.removeSlide(id);
+                } else {
+                  swal("Your delete category !");
+                }
+              });
+        }
+      }
     }
 </script>
 
