@@ -4,7 +4,7 @@
                 <label for="add-name">image</label>
                <!--  <input id="add-name" type="file" name="name"  class="form-control" @change="imageChanged"  />
                 <img width="150px" v-if="dataSlide.image" :src="'../image/'+dataSlide.image" /> -->
-            <input type="file" @change="imageChanged" id="add-name"  name="name" >
+            <input type="file" @change="imageChanged" id="add-name"  name="image" >
             <img id="output" v-if="dataSlide.id >0" :src="'../image/'+dataSlide.image"/>
             <img id="output" v-else />
 
@@ -34,6 +34,10 @@
                 slide:{
                  image  : '',
                  status : ''
+            },
+            filters: {
+                q: null,
+
             }
            }
         },

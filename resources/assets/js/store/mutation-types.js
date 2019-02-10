@@ -21,6 +21,7 @@ export const SET_CATEGORY                    = 'SET_CATEGORY'
 export const REMOVE_CATEGORY                 = 'REMOVE_CATEGORY'
 export const SET_DETAIL_CATEGORY             = 'SET_DETAIL_CATEGORY'
 export const SET_CATEGORY_PAGINATION         = 'SET_CATEGORY_PAGINATION'
+export const SET_TEST                        = 'SET_TEST'
 
 export const LOAD_CATEGORY                   = 'LOAD_CATEGORY'
 // blog module

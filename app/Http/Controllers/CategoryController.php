@@ -54,9 +54,24 @@ class CategoryController extends Controller
             //     'name' => $name,
             //     'color' => $color
             // ];
-            $add = $this->categoryRepository->create($request->all());
-            $json = response()->json($add);
-            return $json;
+            //
+
+          // $data = json_encode([
+          //       'address' => $request->address,
+          //       'phone' => $request->phone,
+          //   ]);
+            $data = [
+                'name' => $request->name,
+                'color' => $request->color,
+                'data' => $request->data
+            ];
+
+            dd($data);
+
+            //$add = $this->categoryRepository->create($data);
+            // $json = response()->json($add);
+            // return $json;
+
     }
 
     /**

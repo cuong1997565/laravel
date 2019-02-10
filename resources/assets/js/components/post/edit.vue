@@ -1,21 +1,21 @@
 <template>
-    <editPost v-if="post.id" @submit="update" :dataPost="post" :dataCategory="allCategories"></editPost>
+  <editPost v-if="post.id" @submit="update" :dataPost="post" :dataCategory="allCategories"></editPost>
 </template>
 
 <script type="text/javascript">
-import { mapActions,mapGetters } from 'vuex'
-import editPost from './form-post.vue';
-    export default{
-       components: {
-            editPost
-       },
-       data:function(){
-          return{
-               post: {
+  import { mapActions,mapGetters } from 'vuex'
+  import editPost from './form-post.vue';
+  export default{
+   components: {
+    editPost
+  },
+  data:function(){
+    return{
+     post: {
 
-               }
-          }
-       },
+     }
+   }
+ },
 
        // created(){
        //     let url ='http://blog.test/post/' +this.$route.params.id+ '/edit';
@@ -29,32 +29,32 @@ import editPost from './form-post.vue';
 
        methods:{
         ...mapActions(['pushBlogs' , 'getBlogsEdit']),
-           update: function(blog){
+        update: function(blog){
 
 
-           this.pushBlogs({
-               blog: blog,
-               cb: ()=>{
-                 this.$router.push({name: 'Listpost'})
-               }
-           })
-
+         this.pushBlogs({
+           blog: blog,
+           cb: ()=>{
+             this.$router.push({name: 'Listpost'})
            }
-       },
+         })
 
-       mounted(){
-          this.getBlogsEdit({
-              id: this.$route.params.id,
-              cb: (blog) =>{
-                this.post = Object.assign({}, this.post, blog)
-              }
-          });
-              this.$store.dispatch('getCategory')
-       },
+       }
+     },
 
-         computed: {
-              ...mapGetters(['allCategories'])
-          },
+     mounted(){
+      this.getBlogsEdit({
+        id: this.$route.params.id,
+        cb: (blog) =>{
+          this.post = Object.assign({}, this.post, blog)
+        }
+      });
+      this.$store.dispatch('getCategory')
+    },
 
-    }
+    computed: {
+      ...mapGetters(['allCategories'])
+    },
+
+  }
 </script>

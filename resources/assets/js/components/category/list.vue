@@ -1,5 +1,10 @@
 <template id="list-category">
   <div class="row">
+    <div class="full-left">
+       <form>
+          <input v-model="filters.q" type="text" class="form-control" placeholder="Tìm kiếm..." @keydown="filter()">
+       </form>
+    </div>
     <div class="pull-right">
       <router-link class="btn btn-xs btn-primary" v-bind:to="{path: '/add-category'}">
         <span class="glyphicon glyphicon-plus"></span>
@@ -24,6 +29,7 @@
           <th>#</th>
           <th>category name</th>
           <th>category color</th>
+          <th>data</th>
           <th>Created At</th>
           <th>Updated At</th>
           <th class="col-md-2">Actions</th>
@@ -34,6 +40,7 @@
           <td>{{ index + 1 }}</td>
           <td>{{ category.name }}</td>
           <td>{{ category.color }}</td>
+          <td> {{category.data}} </td>
           <td>{{ category.created_at }}</td>
           <td>{{ category.updated_at }}</td>
           <td>
@@ -50,26 +57,29 @@
 <script>
 
   import { mapActions,mapGetters } from 'vuex';
+  import { debounce } from 'lodash'
+
 
 
 export default {
       data:function(){
-        return {category: ''};
+        return {
+            filters: {
+                q: null,
+                page: null
+            }
+        }
       },
-
-   mounted () {
-    this.$store.dispatch('getCategory')
-  },
-
    computed: {
         ...mapGetters(['allCategories'])
     },
 
   methods:{
-         ...mapActions(['removeCategory']),
-        // filter: debounce(function () {
-        //     this.categories({params: this.filters})
-        // }, 500),
+         ...mapActions(['removeCategory','fetchBlogs']),
+
+        filter: debounce(function () {
+            this.fetchBlogs({params: this.filters})
+        }, 500),
 
      deleteCategory (id) {
 
@@ -91,6 +101,14 @@ export default {
                 }
               });
         }
-  }
+  },
+
+
+   mounted () {
+    this.$store.dispatch('getCategory')
+    this.fetchBlogs()
+  },
+
+
 }
 </script>

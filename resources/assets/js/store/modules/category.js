@@ -5,7 +5,8 @@ import {
   SET_CATEGORY,
   SET_CATEGORY_PAGINATION,
   REMOVE_CATEGORY,
-  SET_DETAIL_CATEGORY
+  SET_DETAIL_CATEGORY,
+  SET_TEST
 } from '../mutation-types'
 
 /**
@@ -13,6 +14,7 @@ import {
  */
 const state = {
   categories: [],
+  blogs: [],
   category: {},
   pagination: {}
 }
@@ -43,6 +45,24 @@ const actions = {
     }
   },
 
+  async fetchBlogs({commit},payload){
+      commit(FETCHING_RESOURCES)
+      let { params } = payload ? payload : {}
+
+      try {
+      let blogs =  await axios.get('/api/listcategory', {params})
+      console.log(blogs.data.meta)
+      // commit(SET_CATEGORY, blogs.data)
+      //   if (blogs.data.meta) {
+      //     commit(SET_CATEGORY_PAGINATION, blogs.data.meta)
+
+      //    }
+        // commit(FETCHING_RESOURCES_DONE)
+      } catch(err) {
+        commit(FETCHING_RESOURCES_FAIL, err)
+      }
+  },
+
 
 
 
@@ -61,10 +81,10 @@ async pushCategory({ commit }, payload) {
 
         let response = null
        if (category.id) {
-            response = await axios.put('/api/postVue/'+category.id, category);
+            response = await axios.put('/api/editcategory/'+category.id, category);
 
        }else{
-           response = await axios.post('/api/postVue',category);
+           response = await axios.post('/api/addcategory',category);
        }
        commit(FETCHING_RESOURCES_DONE)
        cb && cb(response.data.data)
@@ -148,6 +168,10 @@ const mutations = {
     state.categories.splice(i, 1)
   },
 
+  [SET_CATEGORY_PAGINATION] (state , pagination){
+       state.pagination = pagination
+  }
+
 }
 
 /**
@@ -162,6 +186,8 @@ const getters = {
   allCategories: (state) => state.categories,
 
   categoryDetail :(state) => state.category,
+
+  categoryPagination: (state) => state.pagination
 
 
 

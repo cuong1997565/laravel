@@ -71,12 +71,18 @@ class SlideController extends Controller
         //
         //
 
+        $image = $request->image;
         $data = [
-                'image' => $request->image,
+                'image' => $image,
                 'status' => $request->status
          ];
-        $image = $this->slideRepository->create($data);
-         return response()->json(['statur' => 'success','msg' => 'slide created success']);
+        $path = $request->image->store(public_path()."/".'image/');
+
+         dd($path);
+
+
+        // $image = $this->slideRepository->create($data);
+        // return response()->json(['statur' => 'success','msg' => 'slide created success']);
     }
 
     /**

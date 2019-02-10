@@ -66,3 +66,6 @@ Route::get('/admin',function(){
 })->name('admin.index');
 
 Route::resource('role','RoleController');
+
+
+// Route::get('database','homeController@getDatabase');

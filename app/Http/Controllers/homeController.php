@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
+
 use App\Category;
 use App\Slide;
 use App\Post;
@@ -42,4 +44,14 @@ class homeController extends Controller
     public function getMaster(){
              return view('frontend.master');
     }
+
+
+    public function getDatabase(){
+            Schema::table('categories', function ($table) {
+                    $table->json('data');
+                });
+        dd("them thanh cong");
+    }
+
+
 }

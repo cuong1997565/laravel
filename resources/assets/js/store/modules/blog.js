@@ -14,7 +14,7 @@ import {
 const state = {
   blogs : [] ,
   blog : {},
-  // test: 's',
+  test: {} ,
 
   pagination: {}
 }
